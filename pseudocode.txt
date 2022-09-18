@@ -1,0 +1,29 @@
+RESTORE "Item" AS NUMBER
+RESTORE "Cart" AS NUMBER
+RESTORE "Total item" AS NUMBER
+RESTORE "finishedSelecting" AS BOOLEAN With "False"
+RESTORE "addQuantity" AS BOOLEAN 
+RESTORE "confirmation" AS BOOLEAN With "False"
+
+BEGIN
+While "confirmation" Equal "False"
+Do
+
+   While "finishedSelecting" Equal "False"
+   Do
+       input "chooseItem"
+       input "finishedSelecting"
+   Endwhile
+   STORE "addQuantity" 
+   If "addQuantity" Equal "True"
+       STORE "Item" Add 1
+   Endif
+   input "confirmation"
+Endwhile
+STORE "Cart" With "Item"
+STORE "cancel"
+If "cancel" Equal "True"
+    STORE "Cart" Times 0
+Endif
+print "Total Item"
+END
